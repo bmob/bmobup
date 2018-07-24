@@ -6,6 +6,13 @@ Bmob平台Node、Java云函数本地开发调试工具,增加云函数开发效�
 
 
 
+Java云函数有个本地函数批量上传调试环境，需要的请看 https://github.com/bmob/BmobJavaCloud
+
+[Java 云函数文档]: https://github.com/bmob/BmobJavaCloud
+
+
+
+
 ## 一、Installation
 
 1.下载本项目内以下文件到本地
