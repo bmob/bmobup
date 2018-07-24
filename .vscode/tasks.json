@@ -1,0 +1,20 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Bmob云函数自动上传预览代码",
+      "type": "shell",
+      "command": "${fileDirname}/bmobup",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "args": [
+        "${fileBasename}"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+2018/07/24 10:22:48 [main.go:165] [E] 读取文件错误
+2018/07/24 10:22:48 [main.go:184] [E] 目录文件不存在
+2018/07/24 10:22:48 [main.go:52] [E] 代码读取错误
+2018/07/24 10:22:50 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/tasks,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_tasks.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:22:50 [main.go:117] [E] 请求错误
+2018/07/24 10:22:50 [main.go:63] [E] 代码更新失败
+2018/07/24 10:24:20 [main.go:165] [E] 读取文件错误
+2018/07/24 10:24:20 [main.go:184] [E] 目录文件不存在
+2018/07/24 10:24:20 [main.go:52] [E] 代码读取错误
+2018/07/24 10:24:21 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/tasks,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_tasks.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:24:21 [main.go:117] [E] 请求错误
+2018/07/24 10:24:21 [main.go:63] [E] 代码更新失败
+2018/07/24 10:24:33 [main.go:165] [E] 读取文件错误
+2018/07/24 10:24:33 [main.go:184] [E] 目录文件不存在
+2018/07/24 10:24:33 [main.go:52] [E] 代码读取错误
+2018/07/24 10:24:34 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/tasks,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_tasks.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:24:34 [main.go:117] [E] 请求错误
+2018/07/24 10:24:34 [main.go:63] [E] 代码更新失败
+2018/07/24 10:27:10 [main.go:165] [E] 读取文件错误
+2018/07/24 10:27:10 [main.go:184] [E] 目录文件不存在
+2018/07/24 10:27:10 [main.go:52] [E] 代码读取错误
+2018/07/24 10:27:12 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/tasks,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_tasks.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:27:12 [main.go:117] [E] 请求错误
+2018/07/24 10:27:12 [main.go:63] [E] 代码更新失败
+2018/07/24 10:32:01 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:32:01 [main.go:52] [E] 代码读取错误
+2018/07/24 10:32:02 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/tasks,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_tasks.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:32:02 [main.go:117] [E] 请求错误
+2018/07/24 10:32:02 [main.go:63] [E] 代码更新失败
+2018/07/24 10:32:37 [main.go:185] [E] 文件格式错误,vscode/tasks
+2018/07/24 10:32:37 [main.go:52] [E] 代码读取错误
+2018/07/24 10:32:38 [main.go:96] [E] https://api.bmob.cn/1/functions/,PUT,更新错误原因：<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Page Not Found</title>
+		<style type="text/css">
+			* {
+				margin:0;
+				padding:0;
+			}
+
+			body {
+				background-color:#EFEFEF;
+				font: .9em "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+			}
+
+			#wrapper{
+				width:600px;
+				margin:40px auto 0;
+				text-align:center;
+				-moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+				-webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+				box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+			}
+
+			#wrapper h1{
+				color:#FFF;
+				text-align:center;
+				margin-bottom:20px;
+			}
+
+			#wrapper a{
+				display:block;
+				font-size:.9em;
+				padding-top:20px;
+				color:#FFF;
+				text-decoration:none;
+				text-align:center;
+			}
+
+			#container {
+				width:600px;
+				padding-bottom:15px;
+				background-color:#FFFFFF;
+			}
+
+			.navtop{
+				height:40px;
+				background-color:#24B2EB;
+				padding:13px;
+			}
+
+			.content {
+				padding:10px 10px 25px;
+				background: #FFFFFF;
+				margin:;
+				color:#333;
+			}
+
+			a.button{
+				color:white;
+				padding:15px 20px;
+				text-shadow:1px 1px 0 #00A5FF;
+				font-weight:bold;
+				text-align:center;
+				border:1px solid #24B2EB;
+				margin:0px 200px;
+				clear:both;
+				background-color: #24B2EB;
+				border-radius:100px;
+				-moz-border-radius:100px;
+				-webkit-border-radius:100px;
+			}
+
+			a.button:hover{
+				text-decoration:none;
+				background-color: #24B2EB;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="container">
+				<div class="navtop">
+					<h1>Page Not Found</h1>
+				</div>
+				<div id="content">
+					<br>The Page You have requested flown the coop.<br>Perhaps you are here because:<br><br><ul><br>The page has moved<br>The page no longer exists<br>You were looking for your puppy and got lost<br>You like 404 pages</ul>
+					<a href="/" title="Home" class="button">Go Home</a><br />
+
+					<br>power by Bmob Restful Api 1.1.1
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+2018/07/24 10:32:38 [main.go:155] [E] 请求错误
+2018/07/24 10:32:38 [main.go:57] [E] 代码更新失败
+2018/07/24 10:33:06 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:33:06 [main.go:52] [E] 代码读取错误
+2018/07/24 10:33:08 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/aa,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_aa.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:33:08 [main.go:117] [E] 请求错误
+2018/07/24 10:33:08 [main.go:63] [E] 代码更新失败
+2018/07/24 10:34:05 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:34:05 [main.go:52] [E] 代码读取错误
+2018/07/24 10:34:06 [main.go:96] [E] https://cloud.bmob.cn/c8bed465c9e6a524/aa,GET,更新错误原因：there is an error:SyntaxError: /data/bmob/www/cloud.bmob.cn.new/appjs/39ee83f92ff3a195130596a4eaec5ddf_aa.js:8
+;
+^
+Unexpected token ;
+2018/07/24 10:34:06 [main.go:117] [E] 请求错误
+2018/07/24 10:34:06 [main.go:63] [E] 代码更新失败
+2018/07/24 10:35:27 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:35:27 [main.go:52] [E] 代码读取错误
+2018/07/24 10:35:36 [main.go:185] [E] 文件格式错误,vscode/tasks
+2018/07/24 10:35:36 [main.go:52] [E] 代码读取错误
+2018/07/24 10:36:18 [main.go:185] [E] 文件格式错误,vscode/tasks
+2018/07/24 10:36:18 [main.go:52] [E] 代码读取错误
+2018/07/24 10:38:01 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:38:01 [main.go:52] [E] 代码读取错误
+2018/07/24 10:38:28 [main.go:185] [E] 文件格式错误,go
+2018/07/24 10:38:28 [main.go:52] [E] 代码读取错误
+2018/07/24 10:38:36 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:38:36 [main.go:52] [E] 代码读取错误
+2018/07/24 10:39:48 [main.go:185] [E] 文件格式错误,json
+2018/07/24 10:39:48 [main.go:52] [E] 代码读取错误
+2018/07/24 10:40:00 [main.go:185] [E] 文件格式错误,go
+2018/07/24 10:40:00 [main.go:52] [E] 代码读取错误
+2018/07/24 10:54:46 [main.go:185] [E] 文件格式错误,go
+2018/07/24 10:54:46 [main.go:52] [E] 代码读取错误
