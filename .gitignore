@@ -1,3 +1,5 @@
 # main.go
 log
 Demo
+config.ini
+*.log
