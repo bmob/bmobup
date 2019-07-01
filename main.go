@@ -201,8 +201,15 @@ func (app *App) readFile(fileName string) (string, bool) {
 }
 
 func (app *App) init() bool {
+	appPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
+    if err != nil {
+		logger.Fatal(err)
+    }
+
+	app.appPath = appPath
+
 	//日志配置
-	const logPath = "bmobup.log"
+	var logPath = filepath.Join(app.appPath, "", "bmobup.log")
 
 	var verbose = flag.Bool("verbose", false, "print info level logs to stdout")
 	lf, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0660)
@@ -212,14 +219,6 @@ func (app *App) init() bool {
 	defer lf.Close()
 
 	defer logger.Init("LoggerExample", *verbose, true, lf).Close()
-
-
-	appPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
-    if err != nil {
-		logger.Fatal(err)
-    }
-
-	app.appPath = appPath
 
 	//配置文件
 	configFile, ok := app.fileExists("config.ini")
