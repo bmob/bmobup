@@ -180,14 +180,17 @@ func (app *App) readFile(fileName string) (string, bool) {
 		return "", false
 	}
 	
-	configFile, ok := app.fileExists(fileName)
-	logger.Errorf("%s", configFile)
-	if !ok {
+	dir, err := os.Getwd()
+	if err != nil {
+		logger.Fatal(err)
+	}
+	codeFile, err := filepath.Abs(filepath.Join(dir, "", fileName))
+	if err != nil {
 		logger.Errorf("目录文件不存在")
 		return "", false
-	}
+    }
 
-	bytes, err := ioutil.ReadFile(configFile)
+	bytes, err := ioutil.ReadFile(codeFile)
 	if err != nil {
 		logger.Errorf("读取文件错误")
 		return "", false
