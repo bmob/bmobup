@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bmob/library/file"
-	"bmob/library/log"
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
@@ -13,6 +11,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"flag"
+	"github.com/google/logger"
 )
 
 type App struct {
@@ -24,7 +24,6 @@ type App struct {
 	key       string
 	secretKey string
 	language  int
-	log       *log.Logger
 }
 
 func main() {
@@ -33,15 +32,14 @@ func main() {
 
 	// 获取Key
 	if ok := app.init(); !ok {
-		app.log.Error("初始化失败")
+		logger.Errorf("初始化失败")
 		return
 	}
 
 	//获取代码内容
 	params := os.Args
 	if len(params) < 2 {
-		app.log.Error("必须输入文件名称")
-		log.Error("必须输入文件名称")
+		logger.Errorf("必须输入文件名称")
 		return
 	}
 
@@ -49,18 +47,18 @@ func main() {
 	fileName := params[1]
 	code, ok := app.readFile(fileName)
 	if !ok {
-		app.log.Error("代码读取错误")
+		logger.Errorf("代码读取错误")
 		return
 	}
 	_, ok = app.sendCode(code)
 	if !ok {
-		app.log.Error("代码更新失败")
+		logger.Errorf("代码更新失败")
 		return
 	}
 
 	result, ok := app.viewCloud()
 	if !ok {
-		app.log.Error("代码更新失败")
+		logger.Errorf("代码更新失败")
 		return
 	}
 
@@ -79,13 +77,13 @@ func (app *App) request(method string, url string, row string) (string, bool) {
 		res.Header.Set("X-Bmob-REST-API-Key", app.key)
 	}
 	if err != nil {
-		app.log.Error("Fatal error ", err.Error())
+		logger.Errorf("Fatal error ", err.Error())
 	}
 
 	//处理返回结果
 	response, err := client.Do(res)
 	if err != nil {
-		app.log.Error("Fatal error ", err.Error())
+		logger.Errorf("Fatal error ", err.Error())
 	}
 
 	//返回的状态码
@@ -93,7 +91,7 @@ func (app *App) request(method string, url string, row string) (string, bool) {
 	b, err := ioutil.ReadAll(response.Body)
 	if err != nil || status != 200 {
 		// handle error
-		app.log.Error("%s,%s,更新错误原因：%s", url, method, string(b))
+		logger.Errorf("%s,%s,更新错误原因：%s", url, method, string(b))
 		fmt.Printf("错误返回：%s \n 具体请查看log日志", string(b))
 		return "", false
 	}
@@ -114,7 +112,7 @@ func (app *App) viewCloud() (string, bool) {
 	result, ok := app.request("GET", url, "")
 
 	if !ok {
-		app.log.Error("请求错误")
+		logger.Errorf("请求错误")
 		return "", false
 	}
 	return result, true
@@ -142,17 +140,17 @@ func (app *App) sendCode(code string) (string, bool) {
 	body.Code = encStr
 	body.Comment = ""
 
-	app.log.Debug("发送结构体：%s", body)
+	logger.Info("发送结构体：%s", body)
 
 	b, err := json.Marshal(body)
 	if err != nil {
-		app.log.Error("json err:", err)
+		logger.Errorf("json err:", err)
 	}
 	row := string(b)
 	result, ok := app.request("PUT", url, row)
 
 	if !ok {
-		app.log.Error("请求错误")
+		logger.Errorf("请求错误")
 		return "", false
 	}
 	return result, true
@@ -161,8 +159,8 @@ func (app *App) sendCode(code string) (string, bool) {
 //返回文件路径
 func (app *App) fileExists(fileName string) (string, bool) {
 	configFile := filepath.Join(app.appPath, "", fileName)
-	if !file.FileExists(configFile) {
-		app.log.Error("读取文件错误")
+	if _, err := os.Stat(configFile); os.IsNotExist(err) {
+		logger.Errorf("配置文件 %s 不存在", configFile)
 		return "", false
 	}
 	return configFile, true
@@ -170,33 +168,28 @@ func (app *App) fileExists(fileName string) (string, bool) {
 
 // 读取代码文件内容
 func (app *App) readFile(fileName string) (string, bool) {
-	nameArr := strings.Split(fileName, ".")
-	app.funcName = nameArr[0]
-
-	language := 9
-	if nameArr[1] == "js" {
-		language = 1
-	}
-	if nameArr[1] == "java" {
-		language = 2
-	}
-
-	if language == 9 {
-		app.log.Error("云函数文件格式错误,%s", nameArr[1])
-		fmt.Printf("云函数文件格式错误,%s \n", nameArr[1])
+	basename := filepath.Base(fileName)
+	app.funcName = strings.TrimSuffix(basename, filepath.Ext(basename))
+	if strings.HasSuffix(fileName, "js") {
+		app.language = 1
+	} else if strings.HasSuffix(fileName, "java") {
+		app.language = 2
+	} else {
+		logger.Errorf("云函数文件格式错误：%s", fileName)
+		fmt.Printf("云函数文件格式错误：%s \n", fileName)
 		return "", false
 	}
-
-	app.language = language
+	
 	configFile, ok := app.fileExists(fileName)
+	logger.Errorf("%s", configFile)
 	if !ok {
-		app.log.Error("目录文件不存在")
+		logger.Errorf("目录文件不存在")
 		return "", false
 	}
 
 	bytes, err := ioutil.ReadFile(configFile)
 	if err != nil {
-		app.log.Error("读取文件错误")
+		logger.Errorf("读取文件错误")
 		return "", false
 	}
 
@@ -205,33 +198,37 @@ func (app *App) readFile(fileName string) (string, bool) {
 }
 
 func (app *App) init() bool {
-	appPath := file.GetCurrentPath()
+	//日志配置
+	const logPath = "bmobup.log"
+
+	var verbose = flag.Bool("verbose", false, "print info level logs to stdout")
+	lf, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0660)
+	if err != nil {
+	logger.Fatalf("Failed to open log file: %v", err)
+	}
+	defer lf.Close()
+
+	defer logger.Init("LoggerExample", *verbose, true, lf).Close()
+
+
+	appPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
+    if err != nil {
+		logger.Fatal(err)
+    }
 
 	app.appPath = appPath
-
-	//日志配置
-	appLog := new(log.Logger)
-	var err error
-	appLog, err = log.New(
-		"info",
-		"log/all.log",
-		7)
-	if err != nil {
-		panic(err.Error())
-	}
-	app.log = appLog
 
 	//配置文件
 	configFile, ok := app.fileExists("config.ini")
 
 	if !ok {
-		app.log.Error("目录文件不存在")
+		logger.Errorf("目录文件不存在")
 		return false
 	}
 
 	C, err := goconfig.LoadConfigFile(configFile)
 	if err != nil {
-		app.log.Error("load config file error %s", err)
+		logger.Errorf("load config file error %s", err)
 		return false
 	}
 
