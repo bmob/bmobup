@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"flag"
 	"fmt"
-	"github.com/Unknwon/goconfig"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
-	"flag"
+
+	"github.com/Unknwon/goconfig"
 	"github.com/google/logger"
 )
 
@@ -104,9 +105,9 @@ func (app *App) request(method string, url string, row string) (string, bool) {
 func (app *App) viewCloud() (string, bool) {
 	app.status = 2
 	fmt.Printf("云端结果返回中...\n")
-	url := "https://cloud.bmob.cn/" + app.secretKey + "/" + app.funcName
+	url := "https://cloud.codenow.cn/" + app.secretKey + "/" + app.funcName
 	if app.language == 2 {
-		url = "https://javacloud.bmob.cn/" + app.secretKey + "/" + app.funcName
+		url = "https://javacloud.codenow.cn/" + app.secretKey + "/" + app.funcName
 	}
 	fmt.Println("url", url)
 	result, ok := app.request("GET", url, "")
@@ -122,7 +123,7 @@ func (app *App) viewCloud() (string, bool) {
 //发送代码到服务器
 func (app *App) sendCode(code string) (string, bool) {
 	fmt.Printf("云代码" + app.funcName + "上传中...\n")
-	url := "https://api2.bmob.cn" + "/1/functions/" + app.funcName
+	url := "https://api.codenow.cn" + "/1/functions/" + app.funcName
 
 	type bodyt struct {
 		Code     string `json:"code"`
@@ -179,7 +180,7 @@ func (app *App) readFile(fileName string) (string, bool) {
 		fmt.Printf("云函数文件格式错误：%s \n", fileName)
 		return "", false
 	}
-	
+
 	dir, err := os.Getwd()
 	if err != nil {
 		logger.Fatal(err)
@@ -188,7 +189,7 @@ func (app *App) readFile(fileName string) (string, bool) {
 	if err != nil {
 		logger.Errorf("目录文件不存在")
 		return "", false
-    }
+	}
 
 	bytes, err := ioutil.ReadFile(codeFile)
 	if err != nil {
@@ -202,9 +203,9 @@ func (app *App) readFile(fileName string) (string, bool) {
 
 func (app *App) init() bool {
 	appPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
-    if err != nil {
+	if err != nil {
 		logger.Fatal(err)
-    }
+	}
 
 	app.appPath = appPath
 
@@ -214,7 +215,7 @@ func (app *App) init() bool {
 	var verbose = flag.Bool("verbose", false, "print info level logs to stdout")
 	lf, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0660)
 	if err != nil {
-	logger.Fatalf("Failed to open log file: %v", err)
+		logger.Fatalf("Failed to open log file: %v", err)
 	}
 	defer lf.Close()
 
